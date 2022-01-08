@@ -220,7 +220,7 @@ export const products = [
     price: 45,
     description: "",
     addOns: null, // or null if the product does not need an add on
-    hot: false,
+    hot: true,
     imagePath: "/products/beef-salad.png"
   },
   {
@@ -238,7 +238,7 @@ export const products = [
     price: 30,
     description: "",
     addOns: null, // or null if the product does not need an add on
-    hot: false,
+    hot: true,
     imagePath: "/products/fruite-salad.png"
   },
   {
@@ -265,7 +265,7 @@ export const products = [
     price: 40,
     description: "",
     addOns: null, // or null if the product does not need an add on
-    hot: false,
+    hot: true,
     imagePath: "/products/Romain-salad.png"
   },
   {
@@ -294,7 +294,7 @@ export const products = [
     price: 35,
     description: "",
     addOns: null, // or null if the product does not need an add on
-    hot: false,
+    hot: true,
     imagePath: "/products/french-fries.png"
   },
   {
@@ -423,7 +423,7 @@ export const products = [
     price: 50,
     description: "",
     addOns: null, // or null if the product does not need an add on
-    hot: false,
+    hot: true,
     imagePath: "/products/Smoothie-Milkshake.png"
   },
   {
@@ -441,9 +441,13 @@ export const products = [
     price: 25,
     description: "",
     addOns: null, // or null if the product does not need an add on
-    hot: false,
+    hot: true,
     imagePath: "/products/sundae-strawberry.png"
   }
 ];
 
+
+ export const addProductsToDb = (db) => {
+ db.collection('products').insertMany(products)
+}
 

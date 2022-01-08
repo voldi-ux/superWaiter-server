@@ -13,11 +13,15 @@ export const collectionsExist = async (db) => {
       //geting collections infor from the database.
       const dbCollections = await db.collections();
 
-      myCollections.forEach(myColl => {
+      myCollections.forEach(async myColl => {
           //check to see if my collection  exist in the db;
           const collExist = dbCollections.some(({ collectionName }) => collectionName === myColl)
           if (!collExist) {
-            db.createCollection(myColl, schemas[myColl])
+            await  db.createCollection(myColl, schemas[myColl])
+
+            if (myColl === 'products') {
+               db.collection(myColl).createIndex({name:'text', description:'text'})
+             }
           }
       })
   } catch (error) {

@@ -1,6 +1,7 @@
 /** @format */
 
 import bcrypt from "bcrypt";
+import { ObjectId } from "mongodb";
 
 import { getCollections } from "../database/db.js";
 
@@ -8,52 +9,69 @@ const hashR = 5;
 
 export default class User {
   // prettier-ignore
-  constructor(user) {
-          (this.name = user.name),
-          (this.surname = user.surname),
-          (this._id = user._id || null),
-          (this.email = user.email),
-          (this.phone = user.phone),
-          (this.orderCount = user.orderCount || 0),
-          (this.verified = user.verified || false),
-          (this.password = user.password);
-          this.favorites = user.favorites || []
+
+  static async _findUserByEmail(email) {
+    const { users } = getCollections();
+    const user = await users.findOne({ email });
+     return user
   }
 
-  //this method log in the user
   static async loginUser(email, password) {
-    const { users } = getCollections();
     const msg = "incorrect email or password";
 
-    const user = await users.findOne({ email });
+    const user = await this._findUserByEmail(email);
     //note: the if !user and !match if statements are returning an error object and the curly braces do NOT signify a block of code but an object literal
     if (!user) return { msg };
 
     const match = await bcrypt.compare(password, user.password);
+
     if (!match) return { msg };
 
-    return user;
+    const { name, surname, phone, orderCount, favorites, orders, ordered, _id } = user;
+
+    return {
+      info: {
+        _id,
+        name,
+        surname,
+        email,
+        phone,
+        orderCount
+      },
+      favorites,
+      orders,
+      ordered
+    };
   }
 
   //registers/inserts a user to the datdabase
-  async addUser() {
+  static async addUser(user) {
     try {
-      console.log(this);
-    //users collection
-      const { users } = getCollections();
-      const user = await users.findOne({ email: this.email });
+      const userExist = await this._findUserByEmail(user.email);
       //note: the if (user) statement is returning an error object and the curly braces do NOT signify a block of code but an object literal
-      if (user) return { msg: "oops, a user with that email already exist" };
+      if (userExist) return { msg: "oops, a user with that email already exist" };
 
-      const hashedPassword = await bcrypt.hash(this.password, hashR);
+      const hashedPassword = await bcrypt.hash(user.password, hashR);
 
-      this.password = hashedPassword;
+      user.password = hashedPassword;
 
-      const reuslt = await users.insertOne(this);
+      const result = await users.insertOne(user);
 
-      this._id = reuslt.insertedId;
+      const { name, surname, email, phone, orderCount, favorites, orders, ordered } = user;
 
-      return this;
+      return {
+        info: {
+          _id: result.id,
+          name,
+          surname,
+          email,
+          phone,
+          orderCount
+        },
+        favorites,
+        orders,
+        ordered
+      };
     } catch (error) {
       console.log(JSON.stringify(error, null, 4));
 
@@ -63,7 +81,61 @@ export default class User {
     }
   }
 
-  static getOrders(id) {
-    //geting
+  static async getUserOrders(id) {
+    const { orders } = getCollections();
+    const ORDERS = await orders.find({ userId: id });
+    return ORDERS;
+  }
+
+  static async RemoveItemFromFav(itemId, userId) {
+    try {
+      const { users } = getCollections();
+
+      const {
+        value: { favorites }
+      } = await users.findOneAndUpdate(
+        { _id: ObjectId(userId) },
+        {
+          $pull: {
+            favorites: { _id: itemId }
+          }
+        },
+        {
+          returnDocument: "after",
+          projection: {
+            favorites: 1
+          },
+        }
+        );
+      console.log(favorites)
+      return favorites;
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  static async addItemToFav(item, userId) {
+    try {
+      const { users } = getCollections();
+
+      const {value: { favorites }} = await users.findOneAndUpdate(
+          { _id: ObjectId(userId) },
+          {
+            $push: {
+              favorites: item
+            }
+          },
+          {
+            returnDocument: "after",
+            projection: {
+              favorites: 1
+            },
+          }
+        )
+
+      return favorites;
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 }

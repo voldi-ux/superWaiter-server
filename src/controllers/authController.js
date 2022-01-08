@@ -6,7 +6,7 @@ import User from "../models/user.js";
 export const signUpController = async (req, resp) => {
   const { password, name, surname, confirmPassword, email, phone } = req.body;
   console.log(req.body)
-    const user = new User(req.body);
+  
 
   //checking to see if the user information are valid information
   if (name.length < 3 || surname.name < 3) return resp.json({ msg: "ensure that all fields are at least 3 characters long" });
@@ -15,13 +15,17 @@ export const signUpController = async (req, resp) => {
   if (password !== confirmPassword) return resp.json({ msg: "passwords do not match" });
  
     //adduser func/method returns a user object e.g {name:'some name',etc.}
-  return resp.json(await user.addUser());
+  return resp.json(await User.addUser({...req.body, orders:[], favorites:[], orderCount:0, ordered}));
 };
+
+
+
+
 
 export const signInController = async (req, resp) => {
 
   const { password, email } = req.body;
-  console.log(req.body)
+  console.log(await User.loginUser(email, password));
   if (password.length < 4)return resp.json({ msg: "password must at least be 5 characters long" });
   return resp.json(await User.loginUser(email, password));
 };

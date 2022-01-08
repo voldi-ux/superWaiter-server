@@ -28,11 +28,7 @@ const userSchema = {
           bsonType: "number",
           description: "the count must be a number"
         },
-        verified: {
-          bsonType: "bool",
-          description: "the value must be a boolean"
-        },
-        Favorites: {
+        favorites: {
           bsonType:'array'
         }
       }

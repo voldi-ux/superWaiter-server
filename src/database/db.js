@@ -6,14 +6,14 @@ let _db;
 
 const connectToDb = async (cb) => {
   try {
-    const client = new MongoClient(process.env.MONGO_URI);
+    const client = new MongoClient(process.env.MONGO_URI, { useUnifiedTopology: true });
     // connecting to the mongoDb server
     await client.connect();
     //getting our database
     _db = client.db();
     
     //this function checks to if certain collections exist in the database and it creates the collection if it does not exist.
-   collectionsExist(_db);
+    collectionsExist(_db);
     return cb(null);
   } catch (error) {
     return cb(error);
