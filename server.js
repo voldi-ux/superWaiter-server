@@ -1,14 +1,14 @@
-import express from "express";
 import dotEnv from 'dotenv'
+dotEnv.config()
+import express from "express";
 
 import connectToDb from "./src/database/db.js";
 import AuthRoutes from './src/routes/auth.js'
 import ProductRoutes from './src/routes/product.js'
 import UserRoutes from './src/routes/userRoute.js'
-import cors from 'cors'
+import PaymentsRoutes from './src/routes/paymentRoutes.js'
+import cors from 'cors';
 
-
-dotEnv.config()
 
 
 const app = express();
@@ -22,6 +22,10 @@ app.use(express.static('images'))
 app.use(ProductRoutes);
 app.use(AuthRoutes)
 app.use(UserRoutes)
+app.use(PaymentsRoutes)
+
+//payments routes
+
 
 
 connectToDb(async (err) => {
