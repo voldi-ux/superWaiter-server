@@ -138,4 +138,21 @@ export default class User {
       console.log(error.message);
     }
   }
+
+
+  static async clearUserFavs(id) {
+     
+    try {
+      const { users } = getCollections();
+      
+            
+      const user = await users.findOneAndUpdate({ _id: ObjectId(id) }, { $set: { favorites: [] } }, { returnDocument: "after" });
+      console.log(user)
+      return {success:'cleared successfully'}
+    } catch (error) {
+      console.log(error.message)
+      return {msg:' oops could not clear your favorites items'}
+    }
+       
+  }
 }

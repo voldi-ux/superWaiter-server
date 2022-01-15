@@ -7,6 +7,7 @@ import AuthRoutes from './src/routes/auth.js'
 import ProductRoutes from './src/routes/product.js'
 import UserRoutes from './src/routes/userRoute.js'
 import PaymentsRoutes from './src/routes/paymentRoutes.js'
+import OrdersRoutes from './src/routes/Orders.js'
 import cors from 'cors';
 
 
@@ -23,6 +24,7 @@ app.use(ProductRoutes);
 app.use(AuthRoutes)
 app.use(UserRoutes)
 app.use(PaymentsRoutes)
+app.use(OrdersRoutes)
 
 //payments routes
 

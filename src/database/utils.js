@@ -1,12 +1,14 @@
+import orderSchema from "../schemas/order.js";
 import productSchema from "../schemas/product.js";
 import userSchema from "../schemas/user.js";
 
 //the schema's property name should/must correspond with a colection name;
 const schemas = {
   users: userSchema,
-  products:productSchema
+  products: productSchema,
+  orders:orderSchema
 };
-const myCollections = ["users",'products'];
+const myCollections = ["users",'products','orders'];
 
 export const collectionsExist = async (db) => {
     try {
