@@ -1,0 +1,27 @@
+/** @format */
+
+.list-container {
+  /* max-height: 400px; */
+  height: 92%;
+  width: 250px;
+  background-color: #fff;
+  margin: 37px 10px 0 10px;
+  border-radius: 10px;
+  color: var(--grey);
+  padding: 10px;
+  overflow: auto;
+}
+
+
+.list-container .list-item {
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: .2s all;
+}
+
+.list-container .list-item.active {
+    color: var(--orange);
+}
+.list-container .list-item:hover {
+    color: var(--orange);
+}

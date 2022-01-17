@@ -1,0 +1,57 @@
+/** @format */
+
+:root {
+  --black: #141414;
+  --yellow: #f7c41d;
+  --light-black: #313236;
+  --white: #fbfbfb;
+  --orange: #f7941d;
+  --grey: #707070;
+  --red: #f7421d;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+    user-select: none;
+
+}
+
+html {
+  font-size: 62.5%;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.app-container-inner {
+  width: 1366px;
+  height: 767px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+
+  /* 60px is the height of the top nav bar */
+  height: calc(100% - 60px);
+  flex: 1;
+
+  display: flex;
+}
+
+/* shadows */
+
+.shadow-1 {
+  box-shadow: 0rem 0.1rem 1rem rgba(0, 0, 0, 0.2);
+}
+.shadow-2 {
+  box-shadow: 0rem 1rem 1rem rgba(0, 0, 0, 0.2);
+}

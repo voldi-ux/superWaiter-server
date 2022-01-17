@@ -1,0 +1,62 @@
+/** @format */
+
+.orders-container {
+  background-color: #08515d;
+  flex: 1;
+  display: flex;
+
+}
+
+.orders-container main {
+  background-color: #ffff;
+  flex: 1;
+  height: 92%;
+  margin-top: 37px;
+  border-radius: 10px;
+  margin-right: 10px;
+
+  display: flex;
+}
+
+
+.orders-details {
+    width: 50%;
+    padding: 10px;
+
+    color: var(--grey);
+}
+
+
+
+.orders-details h1 {
+    font-size: 2rem;
+    color: var(--orange);
+    margin-bottom: 20px;
+}
+
+.orders-details h2 {
+    font-weight: normal;
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+
+}
+.orders-details p {
+    font-size: 1.6rem;
+}
+
+
+.orders-details-left {
+}
+
+/* .orders-container main {} */
+
+
+.orders-details-headings {
+  display: flex;
+  justify-content: space-between;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+}
