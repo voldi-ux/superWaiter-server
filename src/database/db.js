@@ -1,6 +1,7 @@
-import { MongoClient } from "mongodb";
-import {collectionsExist} from './utils.js'
+/** @format */
 
+import { MongoClient } from "mongodb";
+import { collectionsExist } from "./utils.js";
 
 let _db;
 
@@ -11,7 +12,7 @@ const connectToDb = async (cb) => {
     await client.connect();
     //getting our database
     _db = client.db();
-    
+
     //this function checks to if certain collections exist in the database and it creates the collection if it does not exist.
     collectionsExist(_db);
     return cb(null);
@@ -21,13 +22,14 @@ const connectToDb = async (cb) => {
 };
 
 export const getCollections = () => {
-    return {
-        users:_db.collection('users'),
-        orders: _db.collection('orders'),
-        products:_db.collection('products')
-    }
-}
+  return {
+    users: _db.collection("users"),
+    orders: _db.collection("orders"),
+    products: _db.collection("products"),
+    admins: _db.collection("admins")
+  };
+};
 
-export const getDb = ()=> _db
+export const getDb = () => _db;
 
 export default connectToDb;

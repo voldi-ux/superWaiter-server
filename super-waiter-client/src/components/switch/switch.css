@@ -1,0 +1,29 @@
+/** @format */
+
+.switch {
+  width: 50px;
+  height: 20px;
+  position: relative;
+  background-color: var(--orange);
+  border-radius: 100px;
+  cursor: pointer;
+}
+
+.switch span {
+  display: block;
+  will-change: transform;
+  height: 20px;
+  width: 20px;
+  background-color: #d42389;
+  transition: all 0.3s;
+  transform: scale(1.2) translateX(0%);
+  border-radius: 50%;
+}
+
+.switch.on {
+  background-color: #4f23d4;
+}
+
+.switch.on span {
+  transform: scale(1.2) translateX(120%);
+}

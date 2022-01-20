@@ -1,0 +1,99 @@
+/** @format */
+
+.mail-container {
+  flex: 1;
+  background-color: #0d4e6b;
+
+  display: flex;
+  padding: 10px;
+}
+
+.mail-users {
+  width: 300px;
+  height: 95%;
+  background-color: #fff;
+  margin: auto 0;
+  margin-right: 10px;
+}
+
+.search-users {
+  width: 100%;
+  height: 4rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  transition: 0.3s all;
+  outline: 2px solid transparent;
+  border-bottom: 1px solid #ccc;
+}
+
+.search-users::placeholder {
+  text-transform: capitalize;
+}
+
+.user-mail-container {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  border-bottom: 1px solid #ccc;
+}
+
+.selection-count {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.mail-create {
+  height: 95%;
+  background-color: #fff;
+  margin: auto 0;
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.mail-create h1 {
+  background-color: var(--light-black);
+  padding: 10px;
+  color: var(--white);
+}
+
+.subject,
+.email-content {
+  padding: 10px;
+  border: none;
+}
+
+.email-content {
+  flex: 1;
+}
+
+.subject {
+  border-bottom: 1px solid #ccc;
+}
+
+.mail-btns {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+  background-color: rgb(252, 252, 252);
+}
+
+.mail-send {
+  display: flex;
+  align-items: center;
+  font-size: 1.7rem;
+  /* background-color: var(--yellow); */
+  padding: 0.5rem 1rem;
+  text-transform: capitalize;
+  /* color: #fff; */
+}
+
+.mail-send-btn {
+}

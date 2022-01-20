@@ -5,4 +5,6 @@
     top: 0;
     z-index: -1;
     left: 0;
+animation: fade-in  .5s ease-in;
+
 }

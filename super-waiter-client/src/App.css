@@ -18,6 +18,11 @@
 
 }
 
+*:focus {
+    outline: none;
+
+}
+
 html {
   font-size: 62.5%;
 }
@@ -54,4 +59,20 @@ html {
 }
 .shadow-2 {
   box-shadow: 0rem 1rem 1rem rgba(0, 0, 0, 0.2);
+}
+
+
+
+
+
+/* keyframes */
+
+@keyframes fade-in {
+  from {
+    opacity: .9;
+  }
+
+  to {
+    opacity: 1;
+  }
 }

@@ -1,0 +1,21 @@
+.products-container {
+  flex: 1;
+background-color:#1d7d53 ;
+padding: 10px;
+display: flex;
+flex-direction: column;
+position: relative;
+overflow: hidden;
+animation: fade-in  .5s ease-in;
+
+}
+
+.products-container-inner {
+    flex: 1;
+    overflow: auto;
+
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-gap: 10px;
+}
+

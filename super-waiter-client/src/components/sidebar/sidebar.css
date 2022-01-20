@@ -19,6 +19,7 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+  transition: all .3s;
 }
 
 .sidebar-links li::before {

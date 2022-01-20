@@ -17,9 +17,7 @@ const Orders = () => {
   }
     return (
       <div className="orders-container">
-        <List />
-        <BgOverlay bgColor={"#707070"} />
-
+    
         <main>
           <section className="orders-details orders-details-left">
             <h1>Customer Info & Address</h1>

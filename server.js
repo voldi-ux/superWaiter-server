@@ -8,6 +8,7 @@ import ProductRoutes from './src/routes/product.js'
 import UserRoutes from './src/routes/userRoute.js'
 import PaymentsRoutes from './src/routes/paymentRoutes.js'
 import OrdersRoutes from './src/routes/Orders.js'
+import AdminRoutes from './src/routes/Admin.js'
 import cors from 'cors';
 
 
@@ -26,8 +27,9 @@ app.use(UserRoutes)
 app.use(PaymentsRoutes)
 app.use(OrdersRoutes)
 
-//payments routes
 
+//admins routes
+app.use('/dashboard', AdminRoutes)
 
 
 connectToDb(async (err) => {

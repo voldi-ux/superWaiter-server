@@ -1,0 +1,116 @@
+/** @format */
+
+.edit-container {
+  padding: 10px;
+  will-change: transform;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.9);
+  left: 0;
+  top: 0;
+
+  transform: translateY(-100%);
+  transition: transform 0.2s;
+}
+
+.edit-container-inner {
+  display: flex;
+  justify-content: center;
+}
+
+.edit-arrow-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit-arrow {
+  font-size: 6rem;
+  color: #fff;
+  line-height: 4.5rem;
+  cursor: pointer;
+}
+
+.edit-form {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  /* background-color: #fff; */
+}
+
+.edit-input {
+  height: 3rem;
+  border-radius: 10rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  transition: 0.3s all;
+  outline: 2px solid transparent;
+  margin-bottom: 20px;
+}
+
+.edit-input::placeholder {
+  text-transform: capitalize;
+}
+
+.edit-input:focus,
+.edit-form textarea:focus {
+  outline: 2px solid var(--yellow);
+}
+
+.edit-form .hot {
+  display: flex;
+  color: #fff;
+  align-items: center;
+}
+.edit-form .hot h1 {
+  font-weight: normal;
+  margin-right: 1rem;
+}
+.edit-form textarea {
+  height: 300px;
+  margin: 2rem 0;
+  font-size: 1.5rem;
+  padding: 10px;
+  border-radius: 10px;
+
+ 
+  outline: 2px solid transparent;
+  transition: 0.3s all;
+}
+
+.edit-form button {
+  font-size: 1.6rem;
+  color: #fff;
+  background-color: var(--orange);
+  width: 100%;
+  padding: 1rem 0;
+  cursor: pointer;
+
+  border: none;
+}
+
+.preview {
+  background-color: #fff;
+  /* flex: 1; */
+  width: 40%;
+  margin-left: 3rem;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.preview-img {
+  width: 50%;
+  display: block;
+  margin: 1rem auto;
+}
+
+.preview-name-price {
+  display: flex;
+  color: var(--grey);
+  justify-content: space-between;
+}
+
+.preview-description {
+  font-size: 1.6rem;
+  margin: 1rem 0;
+}

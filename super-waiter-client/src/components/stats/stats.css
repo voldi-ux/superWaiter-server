@@ -1,0 +1,48 @@
+/** @format */
+
+.stats-container {
+  background-color: #0f7f87;
+  flex: 1;
+}
+
+.orders-overview {
+  display: flex;
+  justify-content: space-around;
+  margin: 10px 0;
+  color: var(--white);
+}
+
+.overview-item {
+  width: 25%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  padding: 10px;
+  background-color: #ffff;
+  border-radius: 10px;
+}
+
+.overview-item:nth-child(1) {
+  color: #23bed4;
+}
+
+.overview-item:nth-child(2) {
+  color: #4f23d4;
+}
+
+.overview-item:nth-child(3) {
+  color: #d42389;
+}
+
+.graphs-container {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 10px;
+}
+
+.graph {
+  background-color: #ffff;
+  height: 290px;
+  border-radius: 10px;
+}

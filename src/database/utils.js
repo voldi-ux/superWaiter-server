@@ -1,3 +1,4 @@
+import adminSchema from "../schemas/admin.js";
 import orderSchema from "../schemas/order.js";
 import productSchema from "../schemas/product.js";
 import userSchema from "../schemas/user.js";
@@ -6,9 +7,11 @@ import userSchema from "../schemas/user.js";
 const schemas = {
   users: userSchema,
   products: productSchema,
-  orders:orderSchema
+  orders: orderSchema,
+  admins:adminSchema
 };
-const myCollections = ["users",'products','orders'];
+
+const myCollections = ["users",'products','orders','admins'];
 
 export const collectionsExist = async (db) => {
     try {

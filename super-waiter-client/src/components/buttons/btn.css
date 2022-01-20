@@ -18,6 +18,9 @@
   transition: all .3s ;
 }
 
+.primary-btn:hover {
+  opacity: .8;
+}
 .primary-btn.btn-clicked {
   background-color: var(--orange);
   color: var(--white);
