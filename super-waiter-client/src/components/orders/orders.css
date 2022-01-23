@@ -4,7 +4,6 @@
   background-color: #08515d;
   flex: 1;
   display: flex;
-  animation: fade-in 0.5s ease-in;
 }
 
 .orders-container main {
@@ -16,6 +15,24 @@
   margin-right: 10px;
 
   display: flex;
+  animation: fade-in 0.5s ease-in;
+
+}
+
+.chef-container {
+    background-color: #ffff;
+  flex: 1;
+  height: 92%;
+  margin-top: 37px;
+  border-radius: 10px;
+  margin-right: 10px;
+  text-align: center;
+}
+
+.chef-container  img {
+  display: block;
+  width: 40%;
+  margin: 0 auto;
 }
 
 .orders-details {

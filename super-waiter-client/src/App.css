@@ -18,6 +18,15 @@
 
 }
 
+
+*::-webkit-scrollbar {
+    width: 5px;
+}
+*::-webkit-scrollbar-thumb  {
+    background-color: rgb(105, 103, 103);
+
+}
+
 *:focus {
     outline: none;
 

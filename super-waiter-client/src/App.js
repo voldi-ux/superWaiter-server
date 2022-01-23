@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState, useEffect,useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Overlay from "./components/overlay/overlay";
 
 import "./App.css";
@@ -16,12 +16,13 @@ import Logs from "./components/logs/Logs";
 import SignInComponent from "./components/signIn/signin";
 import AppContextWrapper, { AppContext } from "./context/appContext";
 import { use } from "bcrypt/promises";
+import { axiosGet, axiosPost } from "./axios/axios";
 
 function App() {
   const [loading, setLoading] = useState(true);
   const [activeComponent, setActiveComponent] = useState("products");
-  const {user,setUser} = useContext(AppContext)
- 
+  const { user, setUser,setData } = useContext(AppContext);
+
   const mainComponents = {
     orders: <Orders />,
     stats: <Stats />,
@@ -29,7 +30,7 @@ function App() {
     mail: <Mail />,
     issues: <Issues />,
     logs: <Logs />
-  };
+  }[activeComponent];
 
   const bgColor = {
     orders: "#707070",
@@ -38,22 +39,28 @@ function App() {
     mail: "#0f7f87",
     issues: "#ff633e",
     logs: "#d41952"
-  };
+  }[activeComponent];
 
   useEffect(async () => {
-    const savedUser =  await JSON.parse(sessionStorage.getItem("super-waiter-user"));
-    if (savedUser) {
-         setUser(savedUser)
-       }
-  }, [])
-  
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
+    const savedUser = await JSON.parse(sessionStorage.getItem("super-waiter-user"));
+    if (savedUser && user === null) {
+      setUser(savedUser);
+    }
   }, []);
 
 
+
+
+  useEffect(async () => {
+    //get products from the database;
+    if (user) {
+      const res = await axiosPost("/dashboard/get-admin-data", { token: user.token });
+      if (!res.err || !res.msg) {
+        setData(res)
+      }
+    }
+    setLoading(false);
+  }, [user]);
 
   if (loading) {
     return (
@@ -62,16 +69,16 @@ function App() {
       </div>
     );
   } else if (!user) {
-     return <SignInComponent />
+    return <SignInComponent />;
   } else {
     return (
       <div className="app-container ">
-        <BgOverlay bgColor={bgColor[activeComponent]} />
+        <BgOverlay bgColor={bgColor} />
         <main className="app-container-inner ">
           <Navbar />
           <div className="main-content">
             <Sidebar setActiveComponent={setActiveComponent} />
-            {mainComponents[activeComponent]}
+            {mainComponents}
           </div>
         </main>
       </div>
@@ -79,12 +86,12 @@ function App() {
   }
 }
 
-
 function AppWrapper() {
-
-  return <AppContextWrapper>
-     <App />
-  </AppContextWrapper>
+  return (
+    <AppContextWrapper>
+      <App />
+    </AppContextWrapper>
+  );
 }
 
 export default AppWrapper;

@@ -6,16 +6,18 @@ display: flex;
 flex-direction: column;
 position: relative;
 overflow: hidden;
-animation: fade-in  .5s ease-in;
 
 }
 
 .products-container-inner {
     flex: 1;
     overflow: auto;
-
+    transition: grid-template-rows .3s;
     display: grid;
     grid-template-columns: repeat(4,1fr);
+    /* grid-auto-rows: 350px; */
     grid-gap: 10px;
+animation: fade-in  .5s ease-in;
+
 }
 

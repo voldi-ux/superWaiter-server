@@ -1,15 +1,23 @@
+/** @format */
+
 import React from "react";
-import './switch.css';
+import "./switch.css";
 
 const Switch = ({ on, toggle }) => {
     
-    return (
-        <div className={`switch ${on ? 'on' : ''}`}>
-            <span></span>
-        </div>
-    );
+  const handleClick = () => {
+    toggle((prev) => {
+        const newState = { ...prev }
+        newState.hot = !prev.hot
+      return newState;
+    });
+    };
+    
+  return (
+    <div className={`switch ${on ? "on" : ""}`} onClick={handleClick}>
+      <span></span>
+    </div>
+  );
 };
-
-
 
 export default Switch;

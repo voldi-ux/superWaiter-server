@@ -5,17 +5,13 @@ import { BiFoodMenu } from 'react-icons/bi';
 import { MdFastfood, MdAddCircle } from "react-icons/md";
 import {BsGraphUp} from 'react-icons/bs'
 import { HiUsers, HiOutlineNewspaper } from "react-icons/hi";
-import { IoFastFood, IoNewspaper, IoIosAdd } from "react-icons/io";
 import { RiMailAddFill } from "react-icons/ri";
 import { GoIssueOpened } from "react-icons/go";
 
 const Sidebar = ({ setActiveComponent }) => {
-
-  console.log(setActiveComponent);
   
   const handleClick = (e, activeComponentName) => {
     const doc = document.querySelector(".sidebar-link.active");
-    console.log(doc);
     if (doc) {
       doc.classList.remove("active");
     }

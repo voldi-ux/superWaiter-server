@@ -13,8 +13,7 @@ export const axiosGet = async url => {
 };
 
 export const axiosPost = async (url, data) => {
-  console.log(baseUrl)
-  console.log(url);
+ 
   try {
     const resp = await axios.post(`${baseUrl}${url}`, data);
     console.log(resp.data)
@@ -22,7 +21,8 @@ export const axiosPost = async (url, data) => {
   } catch (error) {
  console.log(error.message);
 
-        return null
+          return { err: "sometheng went wrong" };
+
   }
 };
 

@@ -2,36 +2,46 @@ import React from 'react';
 import './productsNav.css';
 
 
-const ProductsNav = () => {
-  const handleClick = (e) => {
-    const doc = document.querySelector('.category.active')
+const ProductsNav = ({ setTerm, setCategory, category }) => {
+  const handleClick = (e, category) => {
+    const doc = document.querySelector(".category.active");
     if (doc) {
-       doc.classList.remove('active')
+      doc.classList.remove("active");
     }
-    e.target.classList.add('active')
-  }
-    return (
-      <nav className="products-nav-container">
-        <ul className="products-nav-container-filters">
-          <li className="category active" onClick={handleClick}>
-            all
-          </li>
-          <li className="category" onClick={handleClick}>
-            Main
-          </li>
-          <li className="category" onClick={handleClick}>
-            Drinks
-          </li>
-          <li className="category" onClick={handleClick}>
-            Desserts
-          </li>
-          <li className="category" onClick={handleClick}>
-            Salads
-          </li>
-        </ul>
-        <input className="search shadow-2" placeholder="search products " />
-      </nav>
-    );
+    setCategory(category);
+    e.target.classList.add("active");
+  };
+
+  const handleChange = (e) => {
+    if (e.target.value.length > 3) {
+      setTerm(e.target.value.trim());
+    } else {
+      setTerm("");
+    }
+  };
+
+  return (
+    <nav className="products-nav-container">
+      <ul className="products-nav-container-filters">
+        <li className="category active" onClick={(event) => handleClick(event, "all")}>
+          all
+        </li>
+        <li className="category" onClick={(event) => handleClick(event, "main")}>
+          Main
+        </li>
+        <li className="category" onClick={(event) => handleClick(event, "drinks")}>
+          Drinks
+        </li>
+        <li className="category" onClick={(event) => handleClick(event, "desserts")}>
+          Desserts
+        </li>
+        <li className="category" onClick={(event) => handleClick(event, "salads")}>
+          Salads
+        </li>
+      </ul>
+      <input className="search shadow-2" placeholder={category.toLowerCase() === 'all' ? 'search products in all categories' : `search products in ${category}` } onChange={handleChange} />
+    </nav>
+  );
 };
 
 

@@ -2,21 +2,23 @@
 
 .switch {
   width: 50px;
-  height: 20px;
+  height: 15px;
   position: relative;
   background-color: var(--orange);
   border-radius: 100px;
   cursor: pointer;
+  transition: all 0.3s;
+  outline: 2px solid #ccc;
 }
 
 .switch span {
   display: block;
   will-change: transform;
-  height: 20px;
-  width: 20px;
+  height: 15px;
+  width: 15px;
   background-color: #d42389;
   transition: all 0.3s;
-  transform: scale(1.2) translateX(0%);
+  transform: translateX(0%);
   border-radius: 50%;
 }
 
@@ -25,5 +27,6 @@
 }
 
 .switch.on span {
-  transform: scale(1.2) translateX(120%);
+  transform-origin:right center;
+  transform:  translateX(230%);
 }

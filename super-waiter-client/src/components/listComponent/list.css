@@ -8,20 +8,23 @@
   margin: 37px 10px 0 10px;
   border-radius: 10px;
   color: var(--grey);
-  padding: 10px;
   overflow: auto;
 }
 
 
+
 .list-container .list-item {
-    cursor: pointer;
-    margin-bottom: 10px;
-    transition: .2s all;
+  cursor: pointer;
+  transition: 0.2s all;
+  padding: 10px;
+
+  border-bottom: 1px solid #ccc;
 }
 
-.list-container .list-item.active {
-    color: var(--orange);
+ .list-item.active {
+  color: var(--orange);
 }
 .list-container .list-item:hover {
-    color: var(--orange);
+  color: var(--orange);
 }
+
