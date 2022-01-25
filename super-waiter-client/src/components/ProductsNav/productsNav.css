@@ -2,7 +2,7 @@
 
 .products-nav-container {
   display: flex;
-  width: 70%;
+  width: 75%;
   margin: 0 auto;
   margin-bottom: 10px;
 }
@@ -17,7 +17,7 @@
 .products-nav-container-filters .category {
   padding: 0.4rem 2rem;
   cursor: pointer;
-  transition: s all;
+  transition: .3s all;
 }
 
 .products-nav-container-filters .category.active {

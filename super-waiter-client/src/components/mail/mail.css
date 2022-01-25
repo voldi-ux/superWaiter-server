@@ -14,6 +14,7 @@
   background-color: #fff;
   margin: auto 0;
   margin-right: 10px;
+  overflow: auto;
 }
 
 .search-users {
@@ -45,6 +46,7 @@
   align-items: center;
   padding: 10px;
   border-bottom: 1px solid #ccc;
+  cursor: pointer;
 }
 
 .mail-create {

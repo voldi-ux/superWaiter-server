@@ -8,8 +8,8 @@ const ProductsNav = ({ setTerm, setCategory, category }) => {
     if (doc) {
       doc.classList.remove("active");
     }
-    setCategory(category);
     e.target.classList.add("active");
+    setCategory(category);
   };
 
   const handleChange = (e) => {
@@ -23,8 +23,11 @@ const ProductsNav = ({ setTerm, setCategory, category }) => {
   return (
     <nav className="products-nav-container">
       <ul className="products-nav-container-filters">
-        <li className="category active" onClick={(event) => handleClick(event, "all")}>
+        <li className="category " onClick={(event) => handleClick(event, "all")}>
           all
+        </li>
+        <li className="category active" onClick={(event) => handleClick(event, "starters")}>
+          Starters
         </li>
         <li className="category" onClick={(event) => handleClick(event, "main")}>
           Main
@@ -39,7 +42,7 @@ const ProductsNav = ({ setTerm, setCategory, category }) => {
           Salads
         </li>
       </ul>
-      <input className="search shadow-2" placeholder={category.toLowerCase() === 'all' ? 'search products in all categories' : `search products in ${category}` } onChange={handleChange} />
+      <input className="search shadow-2" placeholder={category.toLowerCase() === "all" ? "search products in all categories" : `search products in ${category}`} onChange={handleChange} />
     </nav>
   );
 };

@@ -54,7 +54,7 @@ const Sidebar = ({ setActiveComponent }) => {
               // handleClick(e,'products')
             }}
           >
-            <MdAddCircle /> add products
+            <MdAddCircle /> add product
           </li>
           <li
             className="sidebar-link"

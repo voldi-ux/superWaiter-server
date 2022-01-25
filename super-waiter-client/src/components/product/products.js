@@ -7,7 +7,6 @@ const Product = ({ item, setEditItem }) => {
   const handleClick = async () => {
     setEditItem(item)
   };
-  console.log('I will re-render again and again')
   return (
     <div className="product-conatiner">
       <img src={`${baseUrl}${item.imagePath}`} alt="product image" className="product-image" />
@@ -15,7 +14,7 @@ const Product = ({ item, setEditItem }) => {
         <h1>{item.name}</h1>
         <h1>R{item.price}.00</h1>
       </div>
-      <p className="description">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old</p>
+      <p className="description">{item.description.slice(0,150)}...</p>
       <button className="product-button" onClick={handleClick}>
         edit
       </button>

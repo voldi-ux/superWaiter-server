@@ -1,4 +1,5 @@
 import React,{useState,useContext,useEffect} from 'react';
+import { axiosPost } from '../../axios/axios';
 import { AppContext } from '../../context/appContext';
 import ButtonPrimary from '../buttons/buttonPrimary';
 import List from '../listComponent/list';
@@ -7,24 +8,26 @@ import './orders.css';
 
 const Orders = () => {
   const [selectedOrder, setOrder] = useState(null)
-  const { orders } = useContext(AppContext)
+  const { orders, user, setUpdatedOrder } = useContext(AppContext);
   let renderItems;
 
-  useEffect(() => {
-    return () => {
-      const doc = document.querySelector(".btn-clicked");
-      if (doc) {
-        doc.classList.remove("btn-clicked");
-      }
-    };
-  }, [selectedOrder]);
+  // useEffect(() => {
+  //   return () => {
+  //     const doc = document.querySelector(".btn-clicked");
+  //     if (doc) {
+  //       doc.classList.remove("btn-clicked");
+  //     }
+  //   };
+  // }, [selectedOrder]);
 
-  const handleButtonClick = (e) => {
-    const doc = document.querySelector(".btn-clicked");
-    if (doc) {
-      doc.classList.remove("btn-clicked");
-    }
-    e.target.classList.add("btn-clicked");
+  const handleButtonClick = async (status) => {
+    const res = await axiosPost("/dashboard/update-order-item", { token: user.token, order: { ...selectedOrder, status } });
+    if (res.msg || res.err) return;
+
+    setOrder(res)
+    setUpdatedOrder(res)
+
+   //I should then notify the owner of the order that their status have changed using socket.io 
   }
 
 
@@ -51,11 +54,7 @@ const Orders = () => {
               <h2>{selectedOrder.customerInfo.postalCode}</h2>
               <h2>{selectedOrder.customerInfo.street}</h2>
               <h1>Instructions</h1>
-              <p>
-                {
-                  selectedOrder.instruction ?  selectedOrder.instruction : 'no instructions for this order'
-                }
-              </p>
+              <p>{selectedOrder.instruction ? selectedOrder.instruction : "no instructions for this order"}</p>
             </section>
 
             <section className="orders-details orders-details-right">
@@ -63,14 +62,12 @@ const Orders = () => {
                 <h1>Items</h1>
                 <h1>R {selectedOrder.total}.00</h1>
               </div>
-              
-              {
-                renderItems
-              }
+
+              {renderItems}
 
               <h1>Update Status</h1>
-              <ButtonPrimary outline={true} onClick={handleButtonClick} title={"Preparing"} />
-              <ButtonPrimary outline={true} onClick={handleButtonClick} title={"Delivering"} />
+              <ButtonPrimary outline={true} onClick={() => handleButtonClick('preparing')} title={"Preparing"} clicked={selectedOrder.status.toLowerCase() === "preparing" && "btn-clicked"} />
+              <ButtonPrimary outline={true} onClick={() => handleButtonClick('delivering')} title={"Delivering"} clicked={selectedOrder.status.toLowerCase() === "delivering" && "btn-clicked"} />
             </section>
           </main>
         ) : (

@@ -10,7 +10,7 @@ import { getFilteredProducts } from './util';
 
 const Products = () => {
   const { products } = useContext(AppContext)
-  const [category,setCategory] = useState('all')
+  const [category,setCategory] = useState('starters')
   const [term, setTerm] = useState('')
   const [editItem,setEditItem] = useState(null)
   const filteredProducts = getFilteredProducts(products, category, term);

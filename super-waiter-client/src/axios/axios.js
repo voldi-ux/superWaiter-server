@@ -16,7 +16,6 @@ export const axiosPost = async (url, data) => {
  
   try {
     const resp = await axios.post(`${baseUrl}${url}`, data);
-    console.log(resp.data)
     return resp.data;
   } catch (error) {
  console.log(error.message);

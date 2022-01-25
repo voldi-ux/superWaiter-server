@@ -109,6 +109,7 @@
   display: flex;
   color: var(--grey);
   justify-content: space-between;
+  text-transform: capitalize;
 }
 
 .preview-description {

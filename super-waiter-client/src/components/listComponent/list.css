@@ -22,9 +22,11 @@
 }
 
  .list-item.active {
-  color: var(--orange);
+  background-color: var(--orange);
+  color: #fff;
 }
 .list-container .list-item:hover {
-  color: var(--orange);
+    background-color: var(--orange);
+  color: #fff;
 }
 
