@@ -11,6 +11,16 @@ export const updateUserFavs = async (req, res) => {
 
 
 export const clearUserFavs = async (req, resp) => {
-    console.log(req.body)
     return resp.send(await User.clearUserFavs(req.body.userId))
 }
+
+
+export const getUserOrders = async (req, res) => {
+    const { userId } = req.body;
+    res.send(await User.getUserOrders(userId))
+};
+
+export const deleteOrder = async (req, res) => {
+    const { userId, orderId } = req.body;
+    res.send(await User.userDeleteOrder(userId,orderId))
+};

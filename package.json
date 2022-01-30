@@ -20,6 +20,9 @@
     "express": "^4.17.2",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.2.2",
+    "nodemailer": "^6.7.2",
+    "socket.io": "^4.4.1",
+    "socket.io-client": "^4.4.1",
     "stripe": "^8.195.0"
   }
 }

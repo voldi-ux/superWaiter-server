@@ -1,10 +1,9 @@
 /** @format */
 
-import React from "react";
+import React, { useContext } from "react";
 import { IconContext } from "react-icons";
 import { BiFoodMenu } from "react-icons/bi";
 import { MdFastfood, MdHistory } from "react-icons/md";
-import BgOverlay from "../bgOverlay/bgOverlay";
 import "./stats.css";
 import {
   Chart as ChartJS,
@@ -17,6 +16,8 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import { getStats } from "./util";
+import {AppContext} from '../../context/appContext'
 
 ChartJS.register(
   CategoryScale,
@@ -117,8 +118,9 @@ const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday','Friday', 'Saturd
 
 
 const Stats = () => {
+const {orders } = useContext(AppContext)
 
-
+const {ordersInProgress,newOrders,totlaOrders} = getStats(orders)
 
   return (
     <main className="stats-container">
@@ -128,21 +130,21 @@ const Stats = () => {
           <div className="overview-item">
             <BiFoodMenu style={{ color: "#23bed4" }} />
             <div>
-              <h1>20</h1>
+              <h1>{newOrders }</h1>
               <h2>new orders</h2>
             </div>
           </div>
           <div className="overview-item">
             <MdFastfood style={{ color: " #4f23d4" }} />
             <div>
-              <h1>15</h1>
+              <h1>{ ordersInProgress}</h1>
               <h2>orders in progress</h2>
             </div>
           </div>
           <div className="overview-item">
             <MdHistory style={{ color: " #d42389" }} />
             <div>
-              <h1>175</h1>
+              <h1>{ totlaOrders}</h1>
               <h2>total orders</h2>
             </div>
           </div>

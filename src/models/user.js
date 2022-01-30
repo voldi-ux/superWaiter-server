@@ -27,7 +27,7 @@ export default class User {
 
     if (!match) return { msg };
 
-    const { name, surname, phone, orderCount, favorites, orders, ordered, _id } = user;
+    const { name, surname, phone, orderCount, favorites,  _id } = user;
 
     return {
       info: {
@@ -39,14 +39,14 @@ export default class User {
         orderCount
       },
       favorites,
-      orders,
-      ordered
     };
   }
 
   //registers/inserts a user to the datdabase
   static async addUser(user) {
     try {
+    const { users } = getCollections();
+      
       const userExist = await this._findUserByEmail(user.email);
       //note: the if (user) statement is returning an error object and the curly braces do NOT signify a block of code but an object literal
       if (userExist) return { msg: "oops, a user with that email already exist" };
@@ -54,26 +54,24 @@ export default class User {
       const hashedPassword = await bcrypt.hash(user.password, hashR);
 
       user.password = hashedPassword;
-
+      
+      
       const result = await users.insertOne(user);
 
-      const { name, surname, email, phone, orderCount, favorites, orders, ordered } = user;
+      const { name, surname, email, phone, favorites} = user;
 
       return {
         info: {
-          _id: result.id,
+          _id: result.insertedId,
           name,
           surname,
           email,
           phone,
-          orderCount
         },
         favorites,
-        orders,
-        ordered
       };
     } catch (error) {
-      console.log(JSON.stringify(error, null, 4));
+      console.log('error',error.message,user);
 
       return {
         msg: "could not register user, please try again latter"
@@ -82,11 +80,28 @@ export default class User {
   }
 
   static async getUserOrders(id) {
-    const { orders } = getCollections();
-    const ORDERS = await orders.find({ userId: id });
-    return ORDERS;
+    try {
+       const { orders } = getCollections();
+       const ORDERS = await orders
+         .find({ $and: [{ userId: id }, { userDeleted: false }] })
+         .sort({ date: -1 })
+         .toArray();
+       return ORDERS;
+    } catch (error) {
+      console.log(console.log(error.message))
+    }
   }
 
+  static async userDeleteOrder(userId, orderId) {
+    try {
+      const { orders } = getCollections();
+      const res = await orders.findOneAndUpdate({ $and: [{ _id: ObjectId(orderId) }, { userId }] }, { $set: { userDeleted: true } })
+      return {msg:'success'}
+    } catch (error) {
+      
+    }
+  }
+ 
   static async RemoveItemFromFav(itemId, userId) {
     try {
       const { users } = getCollections();
@@ -107,7 +122,6 @@ export default class User {
           },
         }
         );
-      console.log(favorites)
       return favorites;
     } catch (error) {
       console.log(error.message);
@@ -155,4 +169,6 @@ export default class User {
     }
        
   }
+
+
 }

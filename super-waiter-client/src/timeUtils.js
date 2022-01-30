@@ -28,21 +28,27 @@ function formatTime(timeMs) {
   }
 }
 
-export function getFormatedTime(time, setTime, interval) {
-    if (typeof time !== 'number') {
-       throw Error('enter a valid time in milliseconds')
-   }
+export function getFormatedTime(time, setTime, interval = 1000 * 60) {
+  if (typeof time !== "number") {
+    throw Error("enter a valid time in milliseconds");
+  }
 
   //if the user only passed in the time in ms, then return the formated time.
-  if (time && (!setTime ||  !interval || typeof interval !== 'number' || typeof setTime !== 'function')) {
+  if (time && (!setTime || typeof interval !== "number" || typeof setTime !== "function")) {
     return formatTime(time);
   }
   let timeFormated = formatTime(time);
 
   //this code will only excute if all three arguments are passed in.
-  if (typeof +timeFormated[0] === "number") {
-    setInterval(() => {
+
+  if (Object.is(+timeFormated[0], NaN)) {
+    return () => {};
+  } else {
+    const id = setInterval(() => {
       setTime(formatTime(time));
     }, interval);
+    return () => {
+      clearInterval(id);
+    };
   }
 }

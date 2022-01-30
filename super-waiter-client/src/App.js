@@ -1,9 +1,10 @@
 /** @format */
 
 import React, { useState, useEffect, useContext } from "react";
-import Overlay from "./components/overlay/overlay";
+import { io } from "socket.io-client";
 
 import "./App.css";
+import Overlay from "./components/overlay/overlay";
 import Navbar from "./components/navbar/navbar";
 import Sidebar from "./components/sidebar/sidebar";
 import BgOverlay from "./components/bgOverlay/bgOverlay";
@@ -15,13 +16,12 @@ import Issues from "./components/issues/issues";
 import Logs from "./components/logs/Logs";
 import SignInComponent from "./components/signIn/signin";
 import AppContextWrapper, { AppContext } from "./context/appContext";
-import { use } from "bcrypt/promises";
-import { axiosGet, axiosPost } from "./axios/axios";
+import { axiosGet, axiosPost, baseUrl } from "./axios/axios";
 
 function App() {
   const [loading, setLoading] = useState(true);
   const [activeComponent, setActiveComponent] = useState("products");
-  const { user, setUser,setData } = useContext(AppContext);
+  const { user, setUser, setData, addOrder } = useContext(AppContext);
 
   const mainComponents = {
     orders: <Orders />,
@@ -48,19 +48,37 @@ function App() {
     }
   }, []);
 
-
-
-
   useEffect(async () => {
     //get products from the database;
     if (user) {
       const res = await axiosPost("/dashboard/get-admin-data", { token: user.token });
       if (!res.err || !res.msg) {
-        setData(res)
+        setData(res);
       }
     }
     setLoading(false);
   }, [user]);
+
+  useEffect(() => {
+    let socket;
+    const savedUser = JSON.parse(sessionStorage.getItem("super-waiter-user"));
+
+    if (savedUser) {
+      socket = io(`${baseUrl}/orders`);
+      socket.on("connect", () => {
+        console.log(socket);
+        socket.emit("join-room", { room: "admin" });
+        socket.on("order-created", (order) => {
+          addOrder(order);
+        });
+      });
+    }
+    return () => {
+      if (socket) {
+        socket.close();
+      }
+    };
+  }, []);
 
   if (loading) {
     return (

@@ -1,3 +1,4 @@
+import { event } from "../../server.js";
 import { getCollections } from "../database/db.js";
 
 
@@ -8,7 +9,10 @@ export default class Order {
         console.log(order)
       let  collection  = getCollections().orders
         try {
-            await collection.insertOne(order);
+         const { insertedId } = await collection.insertOne(order);
+           console.log({ ...order, _id: insertedId });
+            event.emit("order-created", { ...order, _id: insertedId });
+
             return {success:'order placed succesfully'}
         } catch (error) {
                  console.log(JSON.stringify(error, null, 4));

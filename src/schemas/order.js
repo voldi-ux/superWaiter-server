@@ -18,6 +18,18 @@ const orderSchema = {
           bsonType: "string",
           description: "instruction must be a string"
         },
+        status: {
+          bsonType: "string",
+          description: "status must be a string"
+        },
+        new: {
+          bsonType: "bool",
+          description: "new must be a boolean"
+        },
+        userDeleted: {
+          bsonType: "bool",
+          description: "userDeleted must be a boolean"
+        },
         total: {
           bsonType: "number",
           description: "total must be a number"

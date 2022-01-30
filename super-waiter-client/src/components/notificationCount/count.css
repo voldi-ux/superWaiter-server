@@ -1,0 +1,28 @@
+/** @format */
+
+.count-container {
+  margin-left: auto;
+  background-color: rgb(204, 16, 16);
+  max-height: 50px;
+  max-width: 50px;
+  height: 25px;
+  width: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  animation: pulse 1s infinite ;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.8);
+  }
+
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(.8);
+  }
+}

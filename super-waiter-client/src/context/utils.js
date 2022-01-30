@@ -33,4 +33,11 @@ export const toggleSelectAll = (users, selectedUsers) => {
 };
 
 
+export const addUserOrder = (orders, order) => {
+  const newOrders = [...orders]
+  newOrders.unshift(order)
+
+  return newOrders
+}
+
 

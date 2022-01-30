@@ -19,15 +19,12 @@ const userSchema = {
           bsonType: "string",
           description: "password must be a string"
         },
+        
         phone: {
           bsonType: "string",
           description: "the phone nunber must be a number"
         },
 
-        ordersCount: {
-          bsonType: "number",
-          description: "the count must be a number"
-        },
         favorites: {
           bsonType:'array'
         }

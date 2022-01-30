@@ -20,6 +20,14 @@
 
   border-bottom: 1px solid #ccc;
 }
+.list-container .list-item  span{
+ margin-left: auto;
+ color: green;
+}
+.list-container .list-item  h3{
+ display: flex;
+ justify-content: space-between;
+}
 
  .list-item.active {
   background-color: var(--orange);

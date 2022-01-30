@@ -1,4 +1,4 @@
-import React,{memo} from "react";
+import React,{memo, useContext} from "react";
 import { IconContext } from "react-icons";
 import './sidebar.css';
 import { BiFoodMenu } from 'react-icons/bi';
@@ -7,9 +7,15 @@ import {BsGraphUp} from 'react-icons/bs'
 import { HiUsers, HiOutlineNewspaper } from "react-icons/hi";
 import { RiMailAddFill } from "react-icons/ri";
 import { GoIssueOpened } from "react-icons/go";
+import Count from "../notificationCount/count";
+import { AppContext } from "../../context/appContext";
+import { countNewOrders } from "./util";
 
 const Sidebar = ({ setActiveComponent }) => {
+  const { orders } = useContext(AppContext)
+  const count = countNewOrders(orders)
   
+
   const handleClick = (e, activeComponentName) => {
     const doc = document.querySelector(".sidebar-link.active");
     if (doc) {
@@ -37,7 +43,7 @@ const Sidebar = ({ setActiveComponent }) => {
               handleClick(e, "orders");
             }}
           >
-            <BiFoodMenu /> Orders
+            <BiFoodMenu /> Orders {count > 0 ? <Count count={count} /> : null}
           </li>
           <li
             className="sidebar-link"

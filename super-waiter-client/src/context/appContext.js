@@ -1,12 +1,13 @@
 /** @format */
 
 import React, {useReducer, createContext } from "react";
-import { replaceItem, toggleSelect, toggleSelectAll } from "./utils";
+import { addUserOrder, replaceItem, toggleSelect, toggleSelectAll } from "./utils";
 export const AppContext = createContext();
 
 const initAppState = {
   products: [],
   users: [],
+  orders:[],
   logs: [],
   issues: [],
   user: null,
@@ -30,7 +31,9 @@ const appReducer = (state, action) => {
     } else if (action.type === "toggle_select_user") {
       return { ...state, selectedUsers: toggleSelect(action.payload, state.selectedUsers) };
     } else if (action.type === "toggle_select_user_all") {
-      return {...state,selectedUsers:toggleSelectAll(state.users,state.selectedUsers)}
+      return { ...state, selectedUsers: toggleSelectAll(state.users, state.selectedUsers) };
+    } else if (action.type === "add_order") {
+      return { ...state, orders: addUserOrder(state.orders, action.payload) };
     } else return state;
 };
 
@@ -49,7 +52,7 @@ const AppContextWrapper = ({ children }) => {
 
   //orders actions
   const setUpdatedOrder = (item) => dispatch({ type: "update_order", payload: item });
-
+  const addOrder = (item) => dispatch({ type: "add_order", payload: item });
 
   //mail acitons
   const toggleSelectUser = (user) => dispatch({type:"toggle_select_user", payload:user})
@@ -65,7 +68,8 @@ const AppContextWrapper = ({ children }) => {
         setUpdatedProduct,
         setUpdatedOrder,
         toggleSelectUser,
-        toggleSelectUserAll
+        toggleSelectUserAll,
+        addOrder
       }}
     >
       {children}

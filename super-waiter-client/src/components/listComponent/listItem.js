@@ -1,15 +1,12 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { getFormatedTime } from "../../timeUtils";
 import "./list.css";
 
 const ListItem = ({ item, setItem }) => {
- //formating the date object
-const [time, setTime] = useState(getFormatedTime(item.date));
-    
-//this function ensures that the date get formated every second.
-  getFormatedTime(item.date, setTime, 1000);
+  //formating the date object
+  const time = getFormatedTime(item.date);
 
   const handleClick = (event, item) => {
     const doc = document.querySelector(".list-item.active");
@@ -23,7 +20,7 @@ const [time, setTime] = useState(getFormatedTime(item.date));
   return (
     <div onClick={(e) => handleClick(e, item)} className="list-item" key={item._id}>
       <h2>#{item.orderNo}</h2>
-      <h3>Time : {time}</h3>
+      <h3>Time : {time} {item.new ? <span>new</span> : null}</h3>
     </div>
   );
 };

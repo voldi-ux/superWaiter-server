@@ -2,6 +2,10 @@
 import { getCollections } from "../database/db.js";
 import jwt from "jsonwebtoken";
 import { ObjectId } from "mongodb";
+import EventEmitter from 'events';
+import { event } from "../../server.js";
+
+
 
 export default class Admin {
   static async adminSignIn(passcode, pin) {
@@ -64,20 +68,22 @@ export default class Admin {
         return {msg:'oops could not update your product try again in a few minute'}
       }
   }
-  static async updateOrderItem(order) {
-    const { orders } = getCollections();
-    const { _id, ...props } = order;
 
-
-      try {
+  static async updateOrderItem(order,type) {
+    
+    
+    try {
+        const { orders } = getCollections();
+        const { _id, ...props } = order;
         const {value} = await orders.findOneAndUpdate(
           {_id: ObjectId(_id)},
-          { $set: props },
+          { $set: type === 'updateStatus' ? props : {new:false} },
           {
             returnDocument: "after"
           }
         );
 
+        event.emit('order-update', value)
         return value;
 
       } catch (error) {

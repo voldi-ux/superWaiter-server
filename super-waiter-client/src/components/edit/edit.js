@@ -3,11 +3,13 @@
 import React, { useContext, useState } from "react";
 import { axiosPost, baseUrl } from "../../axios/axios";
 import { AppContext } from "../../context/appContext";
+import Loader from "../loader/loader";
 import Switch from "../switch/swtich";
 import "./edit.css";
 
 const Edit = ({ item, updateItem, ...props }) => {
   const { setUpdatedProduct, user } = useContext(AppContext);
+  const [loading,setLoading] = useState(false)
   const closeEditComp = () => {
     updateItem(null);
   };
@@ -27,8 +29,14 @@ const Edit = ({ item, updateItem, ...props }) => {
 
   const handleSave = async (e) => {
     e.preventDefault();
+    if(loading) return
+    setLoading(true)
     const res = await axiosPost("/dashboard/edit-product", { item, token: user.token });
-    console.log(res);
+
+     setTimeout(() => {
+       setLoading(false);
+     }, 3000);
+    
     if (res.msg || res.err) return;
     setUpdatedProduct(res);
   };
@@ -51,7 +59,7 @@ const Edit = ({ item, updateItem, ...props }) => {
                 <h1>Hot</h1> <Switch on={item.hot} toggle={updateItem} />
               </div>
               <textarea onChange={handleChange} placeholder="Description of product" name="description" value={item.description} />
-              <button onClick={handleSave}>save</button>
+              <button onClick={handleSave}> {loading ? <Loader style={{ width: '3rem', height: '3rem' }}/> : 'save' }</button>
             </form>
             <div className="preview">
               <h1>Preview</h1>
