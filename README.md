@@ -4,10 +4,10 @@ The mobile version of the online food store can be found here [https://github.co
 
 
 # features 
-Can add products and edit products
-Can accpets and manage orders
-Can mange clients ie sending emails to them
-and many more
+Can add products and edit products  ,
+Can accpets and manage orders  ,
+Can mange clients ie sending emails to them  ,
+and many more 
 
 
 # Note:
